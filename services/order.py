@@ -14,7 +14,10 @@ def create_order(tickets: list, username: str, date: str = None) -> Order:
 
     if date:
         order.created_at = datetime.strptime(date, "%Y-%m-%d %H:%M")
-    order.save()
+        Order.objects.filter(order_id=order.pk).update(
+            created_at=order.created_at
+        )
+
 
     for ticket in tickets:
         Ticket.objects.create(

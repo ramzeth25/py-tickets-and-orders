@@ -87,6 +87,7 @@ class Ticket(models.Model):
     seat = models.IntegerField()
 
     def clean(self) -> None:
+        errors = {}
         if self.row > self.movie_session.cinema_hall.rows:
             raise ValidationError(
                 {
@@ -105,9 +106,11 @@ class Ticket(models.Model):
                          f"(1, {self.movie_session.cinema_hall.seats_in_row})"]
                 }
             )
+        if errors:
+            raise ValidationError(errors)
 
     def save(self, *args, **kwargs) -> None:
-        self.full_clean()
+        self.full_clean(exclude=["order"])
         return super().save(*args, **kwargs)
 
     class Meta:
@@ -120,7 +123,7 @@ class Ticket(models.Model):
 
     def __str__(self) -> str:
         return (f"{self.movie_session.movie.title} "
-                f"{self.order.created_at} "
+                f"{self.movie_session.show_time} "
                 f"(row: {self.row}, seat: {self.seat})")
 
 

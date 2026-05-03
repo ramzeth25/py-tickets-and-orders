@@ -9,7 +9,7 @@ def create_user(
         first_name: str | None = None,
         last_name: str | None = None
 ) -> AbstractBaseUser:
-    user = get_user_model().objects.create_user(username, password)
+    user = get_user_model().objects.create_user(username=username, password=password)
 
     if email:
         user.email = email
