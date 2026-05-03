@@ -18,7 +18,6 @@ def create_order(tickets: list, username: str, date: str = None) -> Order:
             created_at=order.created_at
         )
 
-
     for ticket in tickets:
         Ticket.objects.create(
             order_id=order.pk,
