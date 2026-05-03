@@ -46,7 +46,7 @@ class CinemaHall(models.Model):
 
 
 class MovieSession(models.Model):
-    show_time = models.DateTimeField(default="2022-01-01")
+    show_time = models.DateTimeField()
     cinema_hall = models.ForeignKey(
         to=CinemaHall, on_delete=models.CASCADE, related_name="movie_sessions"
     )
