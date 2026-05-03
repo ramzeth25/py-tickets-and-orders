@@ -9,17 +9,17 @@ def create_user(
         first_name: str | None = None,
         last_name: str | None = None
 ) -> User:
-        user = get_user_model().objects.create_user(username, password)
+    user = get_user_model().objects.create_user(username, password)
 
-        if email:
-            user.email = email
-        if first_name:
-            user.first_name = first_name
-        if last_name:
-            user.last_name = last_name
+    if email:
+        user.email = email
+    if first_name:
+        user.first_name = first_name
+    if last_name:
+        user.last_name = last_name
 
-        user.save()
-        return user
+    user.save()
+    return user
 
 
 def get_user(user_id: int) -> User:
@@ -28,11 +28,11 @@ def get_user(user_id: int) -> User:
 
 def update_user(
         user_id: int,
-        username:str = None,
+        username: str = None,
         password: str = None,
-        email:str = None,
-        first_name:str = None,
-        last_name:str = None
+        email: str = None,
+        first_name: str = None,
+        last_name: str = None
 ) -> User:
     user = get_user(user_id)
 
@@ -48,8 +48,3 @@ def update_user(
         user.last_name = last_name
     user.save()
     return user
-
-
-
-
-
